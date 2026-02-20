@@ -1,0 +1,22 @@
+---
+import type { Hero as HeroProps, SocialLink as SocialLinkProps } from '../types';
+import CustomImage from './CustomImage.astro';
+import SocialLink from './SocialLink.astro';
+import HeroAnimation from './react/HeroAnimation';
+
+type Props = HeroProps & {
+    socialLinks?: SocialLinkProps[];
+};
+
+const { avatar, socialLinks } = Astro.props;
+---
+
+<section class="relative w-full min-h-[calc(100vh-100px)] flex flex-col items-center justify-end overflow-hidden bg-white pb-16">
+    <!-- Reactive Canvas Animation (No SSR) -->
+    <HeroAnimation client:only="react" />
+
+    <!-- Foreground Content (Profile & Socials) superimposed over canvas -->
+    <div class="relative z-10 flex flex-col items-center pointer-events-auto">
+        {/* Social links have been moved to the Header Contact dropdown */}
+    </div>
+</section>

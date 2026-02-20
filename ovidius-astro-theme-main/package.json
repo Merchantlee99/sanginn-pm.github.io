@@ -1,0 +1,40 @@
+{
+    "name": "ovidius-astro-theme",
+    "type": "module",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@astrojs/mdx": "^4.3.9",
+        "@astrojs/react": "^4.4.2",
+        "@astrojs/rss": "^4.0.13",
+        "@astrojs/sitemap": "^3.6.0",
+        "@fontsource-variable/figtree": "^5.2.10",
+        "@tailwindcss/vite": "^4.1.16",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "astro": "^5.15.3",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "tailwindcss": "^4.1.16"
+    },
+    "devDependencies": {
+        "@fontsource/bungee": "^5.2.7",
+        "@fontsource/cinzel": "^5.2.8",
+        "@fontsource/creepster": "^5.2.7",
+        "@fontsource/dancing-script": "^5.2.8",
+        "@fontsource/press-start-2p": "^5.2.7",
+        "@fontsource/righteous": "^5.2.7",
+        "@fontsource/rock-salt": "^5.2.8",
+        "@fontsource/sedgwick-ave-display": "^5.2.8",
+        "@tailwindcss/typography": "^0.5.19",
+        "prettier": "^3.6.2",
+        "prettier-plugin-astro": "^0.14.1",
+        "prettier-plugin-tailwindcss": "^0.6.14"
+    }
+}

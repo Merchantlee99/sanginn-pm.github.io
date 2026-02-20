@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import FeaturedPostPreview from '../components/FeaturedPostPreview.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import BlogCard from '../components/react/BlogCard';
+import Subscribe from '../components/Subscribe.astro';
+import siteConfig from '../data/site-config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sortPostsByDateDesc } from '../utils/post-utils';
+
+const posts = (await getCollection('blog')).sort(sortPostsByDateDesc);
+const featuredPosts = posts.filter(({ data }) => data.isFeatured);
+const latestPosts = posts.filter(({ data }) => !data.isFeatured).slice(0, 3);
+---
+
+<BaseLayout description={siteConfig.description}>
+    <div class="relative border-b border-slate-100 bg-slate-50" slot="header">
+        <Header class="relative" />
+        <Hero {...siteConfig.hero} socialLinks={siteConfig.socialLinks} />
+    </div>
+    <main class="py-12 grow sm:py-16">
+        {
+            featuredPosts?.length > 0 && (
+                <div class="px-4 mb-12 border-b border-slate-200 sm:mb-16 sm:px-8">
+                    <div class="max-w-6xl mx-auto">
+                        {featuredPosts.map((post) => (
+                            <FeaturedPostPreview post={post} />
+                        ))}
+                    </div>
+                </div>
+            )
+        }
+        <div class="px-4 mb-12 sm:mb-16 sm:px-8">
+            <div class="max-w-3xl mx-auto mb-8 sm:mb-12 xl:max-w-6xl">
+                <h2 class="after:bg-primary text-2xl font-bold tracking-wider text-slate-900 after:mt-4 after:block after:h-1 after:w-16 after:content-['']">
+                    Latest Insights
+                </h2>
+            </div>
+            {
+                latestPosts?.length > 0 ? (
+                    <div class="max-w-3xl mx-auto xl:max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {latestPosts.map((post) => (
+                            <BlogCard 
+                                client:load
+                                title={post.data.title}
+                                description={post.data.description || "No description provided."}
+                                date={post.data.date?.toDateString()}
+                                href={`/blog/${post.id}`}
+                                tags={post.data.tags}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div class="max-w-3xl mx-auto xl:max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {/* Placeholder Cards so User can see the effect */}
+                        <BlogCard
+                            client:load
+                            title="Tech PM으로서의 첫 걸음"
+                            description="AI 기술을 제품에 어떻게 녹여낼 것인가? 기획자부터 엔지니어까지 하나로 묶는 커뮤니케이션 방법에 대한 고찰."
+                            date="Feb 21, 2026"
+                            href="/blog"
+                            tags={['Product', 'AI']}
+                            imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        />
+                        <BlogCard
+                            client:load
+                            title="복잡함 속의 질서, 시스템 설계"
+                            description="대체 불가능한 Tech PM이 되기 위해 컴퓨터과학적 기초를 실무 비즈니스 로직에 어떻게 응용하는지 다룹니다."
+                            date="Feb 14, 2026"
+                            href="/blog"
+                            tags={['System Design', 'CS']}
+                            imageSrc="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        />
+                        <BlogCard
+                            client:load
+                            title="Sunny Beach Day 팔레트 디자인 회고"
+                            description="사용자 경험을 극대화하기 위해 색이 가지는 심리학적 의미와 프론트엔드에서의 효율적인 테마 적용기."
+                            date="Jan 30, 2026"
+                            href="/blog"
+                            tags={['UX/UI', 'Design']}
+                            imageSrc="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        />
+                    </div>
+                )
+            }
+            <div class="max-w-3xl pt-8 mx-auto border-t border-slate-200 mt-12 sm:pt-12">
+                <a
+                    class="bg-primary hover:bg-[var(--color-dark)] hover:shadow-button inline-flex items-center justify-center gap-1.5 rounded-full px-8 py-2.5 font-semibold text-white transition duration-300"
+                    href="/blog"
+                >
+                    View All Posts
+                </a>
+            </div>
+        </div>
+    </main>
+</BaseLayout>

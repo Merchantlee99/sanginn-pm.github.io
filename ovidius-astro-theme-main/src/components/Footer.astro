@@ -1,0 +1,11 @@
+---
+import siteConfig from '../data/site-config';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="px-4 py-8 sm:px-8 sm:py-12 border-t border-slate-100">
+    <p class="text-xs tracking-wider text-center uppercase text-slate-500 font-medium">
+        &copy; {currentYear} <a class="text-slate-700 hover:text-primary transition-colors" href="/">{siteConfig.title}</a> All rights reserved.
+    </p>
+</footer>
