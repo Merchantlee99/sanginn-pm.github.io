@@ -1,125 +1,41 @@
-# Ovidius - Astro & Tailwind CSS Theme by justgoodui.com
+# Sanginn.dev | AI & Product Management
 
-Ovidius is a single-author blog theme for Astro.js. Featuring a minimal, slick, responsive and content-focused design. For more Astro.js themes please check [justgoodui.com](https://justgoodui.com/).
+This repository contains the source code for my personal portfolio and blog website, reflecting my journey to become an "대체 불가능한 Tech PM" (Irreplaceable Tech PM). The project is built using Astro.js and React, featuring interactive UI elements and a focus on clean, professional design.
 
-![Ovidius Astro.js Theme](public/ovidius-preview.jpg)
+## 🛠 작업 과정 및 달성 목표 (What's been done)
 
-[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/JustGoodUI/ovidius-astro-theme)
+초기 작업은 기존 템플릿의 불필요한 요소를 제거하고 저만의 확고한 아이덴티티와 인터랙티브한 시각 요소들을 구축하는 데 집중했습니다.
 
-Clicking the button above ☝️ will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify.
+- **브랜드 정체성 및 디자인 셋업**:
+  - 전문적이고 신뢰감을 주는 비즈니스 컬러 팔레트 도입 (Jet, Ming, Timberwolf, Indigo Dye).
+  - 글로벌 메타데이터 및 소셜 링크(GitHub, Instagram, LinkedIn, Gmail) 연동 완료.
+  - 템플릿 출처 표기를 삭제하고 개인 저작권 표기가 적용된 깔끔한 하단 Footer 구성.
+- **Hero 섹션 및 캔버스 애니메이션 구축**:
+  - 메인 Hero 배너를 브라우저 전체 화면을 덮는 시네마틱 뷰로 확장.
+  - React와 HTML5 Canvas API를 활용하여 마우스와 상호작용하는 유기적인 파티클 네트워크 애니메이션(`HeroAnimation.tsx`) 구현.
+  - 중앙의 "Experience Bank" 글래스모피즘 박스 클릭 시 8가지의 유니크한 영문 폰트가 순환하는(Shuffle) 인터랙티브 무드 추가.
+- **상단 네비게이션(Header) 개편**:
+  - 모바일용 햄버거 메뉴를 제거하고 화면 상단에 항시 떠있는 알약(Pill) 형태의 고정형 네비게이션 바 도입.
+  - KR/EN 언어 변환 토글 스위치 부착.
+  - Contact 메뉴에 마우스 호버 시 소셜 아이콘이 스와이프되어 나타나는 스낵바(Snackbar) 애니메이션 적용.
+- **블로그(Blog) 아키텍처 준비**:
+  - 기존 템플릿의 더미(Dummy) 블로그 포스트 초기화.
+  - 메인 화면에 최신 글을 보여줄 세련된 Huts.com 스타일의 hover/swipe 반응형 React 카드 컴포넌트(`BlogCard.tsx`) 개발.
 
-## Theme Features:
+## 🚀 이후 작업 계획 (Future Roadmap)
 
-- ✅ Featured post support
-- ✅ Subscribe form
-- ✅ Tailwind CSS
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-- ✅ Optimized images using Astro’s `Image` component
+다음 페이즈의 핵심 목표는 **Blog 아키텍처 고도화** 및 콘텐츠 작성 환경 입히기입니다.
 
-## Template Integrations
+- [ ] **블로그 인프라 및 라우팅 정비**: 글을 읽는 상세 페이지(Slug)의 UI/UX 디자인 (가독성 높은 타이포그래피, 프로그레스 바 등 도입).
+- [ ] **콘텐츠 태그 및 필터링 시스템**: AI, Product Management, 개인 에세이 등 글의 카테고리를 분류하고 필터링하는 기능 구현.
+- [ ] **다국어(i18n) 블로그 지원**: 상단의 KR/EN 토글과 연동하여 한국어/영어 콘텐츠를 분리해서 렌더링하도록 구축.
+- [ ] **MDX 기반 컴포넌트 추가**: 블로그 본문에 차트, 코드 블록, 인포그래픽 등을 쉽게 넣을 수 있는 MDX 렌더링 플러그인 셋업.
 
-- @astrojs/tailwind - https://docs.astro.build/en/guides/integrations-guide/tailwind/
-- @astrojs/sitemap - https://docs.astro.build/en/guides/integrations-guide/sitemap/
-- @astrojs/mdx - https://docs.astro.build/en/guides/markdown-content/
-- @astrojs/rss - https://docs.astro.build/en/guides/rss/
+## 💻 Tech Stack
+- **Framework**: [Astro.js](https://astro.build)
+- **UI & Interactivity**: [React](https://react.dev)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) (Vanilla CSS mix)
+- **Animation**: HTML5 Canvas API
 
-## ⚙️ Configuration Notes
-
-### `astro.config.mjs`
-
-Set your deployed domain in the `site` property:
-
-```js
-// astro.config.mjs
-export default defineConfig({
-  site: 'https://example.com'
-});
-```
-
-This is required for correct image optimization and sitemap generation.
-
-### `site-config.ts`
-
-All site-wide data and theme options are stored in `src/data/site-config.ts`. It provides a single configuration object used throughout the theme for navigation, branding, hero content, social links, and more.
-
-You can update this file to customize:
-
-- Site identity — title, description, logo, and default social share image
-- Navigation — primary and secondary navigation links
-- Social links — icons and URLs for supported platforms
-- Hero section — title, text, avatar, and background image
-- Newsletter subscription — form settings suitable for Mailchimp, Formspree, ConvertKit, or other form-based providers. The form supports a custom action URL, configurable email and hidden fields, and an optional honeypot field for spam protection.
-- Pagination — posts per page for blog listings
-
-Images can be referenced either as imports from `src/assets/` (for optimized Astro images) or as string paths from the `public/` directory.
-
-### Images
-
-The theme uses a `CustomImage` component that automatically displays images using Astro’s optimized `<Image />` or a standard `<img>` tag depending on the source.
-
-- Content collection images (used in posts or pages) must be stored in `src/assets/` since they use Astro’s `image()` schema.
-- Site-config images (like the logo, hero background, or social preview) can either be imported from `src/assets/` for optimization or referenced directly from `public/` (e.g. /logo.svg) if you prefer not to optimize them.
-
-The `public/` directory can still be used for static files like favicons, fonts, or robots.txt.
-
-## 🚀 Project Structure
-
-Inside of Ovidius Astro theme, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── data/
-│   ├── layouts/
-│   ├── pages/
-│   ├── styles/
-│   ├── utils/
-│   ├── content.config.ts
-│   └── types.ts
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro (`.astro`) components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-## Astro.js Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## Want to learn more about Astro.js?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credits
-
-- Demo content generate with [Chat GPT](https://chat.openai.com/)
-- Images for demo content from [Unsplash](https://unsplash.com/)
-
-## Astro Themes by Just Good UI
-
-- [Dante](https://github.com/JustGoodUI/dante-astro-theme) is a free single-author blog and portfolio theme.
-
-## License
-
-Licensed under the [GPL-3.0](https://github.com/JustGoodUI/ovidius-astro-theme/blob/main/LICENSE) license.
+---
+*© 2026 Sanginn.dev | AI & Product Management - All rights reserved.*
