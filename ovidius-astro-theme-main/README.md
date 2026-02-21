@@ -12,8 +12,8 @@ This repository contains the source code for my personal portfolio and blog webs
   - 템플릿 출처 표기를 삭제하고 개인 저작권 표기가 적용된 깔끔한 하단 Footer 구성.
 - **Hero 섹션 및 캔버스 애니메이션 구축**:
   - 메인 Hero 배너를 브라우저 전체 화면을 덮는 시네마틱 뷰로 확장.
-  - React와 HTML5 Canvas API를 활용하여 마우스와 상호작용하는 유기적인 파티클 네트워크 애니메이션(`HeroAnimation.tsx`) 구현.
-  - 중앙의 "Experience Bank" 글래스모피즘 박스 클릭 시 8가지의 유니크한 영문 폰트가 순환하는(Shuffle) 인터랙티브 무드 추가.
+  - 중앙의 "Experience Bank" 가로형 알약(Pill) 박스 클릭 시 우주선, 기차, 비행기의 세밀한 라인아트(Line-Art) SVG로 변환되며 고유의 색상과 연기/불꽃 이펙트가 적용되는 Seamless 모핑 애니메이션 완성.
+  - React와 HTML5 Canvas API를 활용하여 흩어지는 픽셀 물리 엔진(`HeroAnimation.tsx`) 구현. "복잡한 문제(흩어진 픽셀)를 구조화하여 제품(정돈된 UI)으로 만들어내는 사람"이라는 메시지를 시각화하기 위해, 캔버스 클릭 시 무작위로 떠다니는 픽셀들이 완벽하게 정돈된 대시보드 인터페이스(Wireframe)로 결합.
 - **상단 네비게이션(Header) 개편**:
   - 모바일용 햄버거 메뉴를 제거하고 화면 상단에 항시 떠있는 알약(Pill) 형태의 고정형 네비게이션 바 도입.
   - KR/EN 언어 변환 토글 스위치 부착.
