@@ -7,7 +7,8 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://ovidius-astro-theme.netlify.app',
+    site: 'https://Merchantlee99.github.io',
+    base: '/sanginn-pm.github.io',
     vite: {
         plugins: [tailwindcss()]
     },
