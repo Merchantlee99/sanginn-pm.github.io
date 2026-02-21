@@ -11,7 +11,7 @@ type Props = HeroProps & {
 const { avatar, socialLinks } = Astro.props;
 ---
 
-<section class="relative w-full min-h-[calc(100vh-100px)] flex flex-col items-center justify-end overflow-hidden bg-white pb-16">
+<section class="relative w-full h-[100svh] md:min-h-[calc(100vh-100px)] md:h-auto flex flex-col items-center justify-end overflow-hidden bg-white pb-12 md:pb-16">
     <!-- Reactive Canvas Animation (No SSR) -->
     <HeroAnimation client:only="react" />
 

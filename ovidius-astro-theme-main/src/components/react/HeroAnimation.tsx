@@ -420,17 +420,17 @@ export default function HeroAnimation() {
             </div>
 
             <div
-                className={`relative z-20 px-6 py-4 sm:px-10 sm:py-5 bg-[var(--color-dark)]/90 backdrop-blur-md rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer pointer-events-auto group text-center border ${isAnimating
+                className={`relative z-20 px-4 py-3 sm:px-10 sm:py-5 bg-[var(--color-dark)]/90 backdrop-blur-md rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer pointer-events-auto group text-center border ${isAnimating
                     ? 'scale-[1.10] shadow-[0_20px_60px_-15px_rgba(60,110,113,0.6)] border-[var(--color-teal)]/80'
                     : 'scale-100 shadow-2xl border-[var(--color-teal)]/30 hover:scale-105 hover:bg-[var(--color-dark)]'
                     }`}
                 onClick={handleTextClick}
                 title="Click me for a surprise!"
             >
-                <h2 className="text-white text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight transition-all duration-300 flex flex-row flex-wrap justify-center items-center gap-x-2 sm:gap-x-4">
+                <h2 className="text-white text-[1.15rem] leading-tight sm:text-4xl lg:text-5xl font-extrabold tracking-tight transition-all duration-300 flex flex-row flex-wrap justify-center items-center gap-x-2 sm:gap-x-4">
                     <span>Welcome to my</span>
                     <span
-                        className="text-[var(--color-primary)] relative inline-flex justify-center items-center h-[32px] sm:h-[48px] lg:h-[60px] w-[200px] sm:w-[320px] lg:w-[420px]"
+                        className="text-[var(--color-primary)] relative inline-flex justify-center items-center h-[28px] sm:h-[48px] lg:h-[60px] w-[170px] sm:w-[320px] lg:w-[420px]"
                     >
                         {animationPhase === 'idle' && (
                             <span>Experience Bank</span>
