@@ -5,6 +5,7 @@ import FormattedDate from './FormattedDate.astro';
 
 const { post } = Astro.props as { post: CollectionEntry<'blog'> };
 const { title, publishDate, updatedDate, featureImage } = post.data;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
 ---
 
 <article class="flex flex-col mb-12 gap-x-8 gap-y-6 sm:flex-row">
@@ -23,13 +24,13 @@ const { title, publishDate, updatedDate, featureImage } = post.data;
             }
         </div>
         <h3 class="text-2xl font-bold text-slate-900">
-            <a href={`/blog/${post.id}/`}>{title}</a>
+            <a href={`${base}/blog/${post.id}/`}>{title}</a>
         </h3>
     </header>
     {
         featureImage?.src && (
             <figure class="shrink-0 sm:w-40">
-                <a href={`/blog/${post.id}/`}>
+                <a href={`${base}/blog/${post.id}/`}>
                     <CustomImage
                         {...featureImage}
                         class="w-full rounded-md"

@@ -12,6 +12,7 @@ import { sortPostsByDateDesc } from '../utils/post-utils';
 const posts = (await getCollection('blog')).sort(sortPostsByDateDesc);
 const featuredPosts = posts.filter(({ data }) => data.isFeatured);
 const latestPosts = posts.filter(({ data }) => !data.isFeatured).slice(0, 3);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
 ---
 
 <BaseLayout description={siteConfig.description}>
@@ -46,7 +47,7 @@ const latestPosts = posts.filter(({ data }) => !data.isFeatured).slice(0, 3);
                                 title={post.data.title}
                                 description={post.data.description || "No description provided."}
                                 date={post.data.date?.toDateString()}
-                                href={`/blog/${post.id}`}
+                                href={`${base}/blog/${post.id}`}
                                 tags={post.data.tags}
                             />
                         ))}
@@ -59,7 +60,7 @@ const latestPosts = posts.filter(({ data }) => !data.isFeatured).slice(0, 3);
                             title="Tech PM으로서의 첫 걸음"
                             description="AI 기술을 제품에 어떻게 녹여낼 것인가? 기획자부터 엔지니어까지 하나로 묶는 커뮤니케이션 방법에 대한 고찰."
                             date="Feb 21, 2026"
-                            href="/blog"
+                            href={`${base}/blog`}
                             tags={['Product', 'AI']}
                             imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                         />
@@ -68,7 +69,7 @@ const latestPosts = posts.filter(({ data }) => !data.isFeatured).slice(0, 3);
                             title="복잡함 속의 질서, 시스템 설계"
                             description="대체 불가능한 Tech PM이 되기 위해 컴퓨터과학적 기초를 실무 비즈니스 로직에 어떻게 응용하는지 다룹니다."
                             date="Feb 14, 2026"
-                            href="/blog"
+                            href={`${base}/blog`}
                             tags={['System Design', 'CS']}
                             imageSrc="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                         />
@@ -77,7 +78,7 @@ const latestPosts = posts.filter(({ data }) => !data.isFeatured).slice(0, 3);
                             title="Sunny Beach Day 팔레트 디자인 회고"
                             description="사용자 경험을 극대화하기 위해 색이 가지는 심리학적 의미와 프론트엔드에서의 효율적인 테마 적용기."
                             date="Jan 30, 2026"
-                            href="/blog"
+                            href={`${base}/blog`}
                             tags={['UX/UI', 'Design']}
                             imageSrc="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
                         />
@@ -87,7 +88,7 @@ const latestPosts = posts.filter(({ data }) => !data.isFeatured).slice(0, 3);
             <div class="max-w-3xl pt-8 mx-auto border-t border-slate-200 mt-12 sm:pt-12">
                 <a
                     class="bg-primary hover:bg-[var(--color-dark)] hover:shadow-button inline-flex items-center justify-center gap-1.5 rounded-full px-8 py-2.5 font-semibold text-white transition duration-300"
-                    href="/blog"
+                    href={`${base}/blog`}
                 >
                     View All Posts
                 </a>

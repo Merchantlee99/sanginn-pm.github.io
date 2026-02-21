@@ -4,6 +4,8 @@ import logoUrl from '../assets/images/logo.svg?url';
 import defaultSocial from '../assets/images/ovidius-preview.jpg';
 import type { SiteConfig } from '../types';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const siteConfig: SiteConfig = {
     logo: {
         src: '',
@@ -18,29 +20,29 @@ const siteConfig: SiteConfig = {
     primaryNavLinks: [
         {
             text: 'Home',
-            href: '/'
+            href: `${base}/`
         },
         {
             text: 'Blog',
-            href: '/blog'
+            href: `${base}/blog`
         },
         {
             text: 'About',
-            href: '/about'
+            href: `${base}/about`
         },
         {
             text: 'Contact',
-            href: '/contact'
+            href: `${base}/contact`
         }
     ],
     secondaryNavLinks: [
         {
             text: 'About',
-            href: '/about'
+            href: `${base}/about`
         },
         {
             text: 'Contact',
-            href: '/contact'
+            href: `${base}/contact`
         }
     ],
     socialLinks: [
