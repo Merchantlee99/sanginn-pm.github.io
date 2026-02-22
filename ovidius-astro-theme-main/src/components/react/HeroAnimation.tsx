@@ -367,6 +367,7 @@ export default function HeroAnimation() {
         };
 
         const handleTouchMove = (e: TouchEvent) => {
+            if (!canvas) return;
             if (e.touches.length > 0) {
                 const rect = canvas.getBoundingClientRect();
                 mouseRef.current = {
@@ -396,25 +397,26 @@ export default function HeroAnimation() {
         };
 
         window.addEventListener('resize', resizeCanvas);
-        canvas.addEventListener('mousemove', handleMouseMove);
-        canvas.addEventListener('mouseleave', handleMouseLeave);
+        // Mouse events on window so dragging off canvas still tracks
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseleave', handleMouseLeave);
 
-        // Touch events for mobile support
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: true });
-        canvas.addEventListener('touchend', handleTouchEnd);
-        canvas.addEventListener('touchcancel', handleTouchEnd);
+        // Touch events on window for mobile support (allows scroll)
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
+        window.addEventListener('touchend', handleTouchEnd);
+        window.addEventListener('touchcancel', handleTouchEnd);
 
         resizeCanvas();
         animate();
 
         return () => {
             window.removeEventListener('resize', resizeCanvas);
-            canvas.removeEventListener('mousemove', handleMouseMove);
-            canvas.removeEventListener('mouseleave', handleMouseLeave);
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseleave', handleMouseLeave);
 
-            canvas.removeEventListener('touchmove', handleTouchMove);
-            canvas.removeEventListener('touchend', handleTouchEnd);
-            canvas.removeEventListener('touchcancel', handleTouchEnd);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleTouchEnd);
+            window.removeEventListener('touchcancel', handleTouchEnd);
 
             cancelAnimationFrame(animationFrameId);
         };
@@ -435,7 +437,7 @@ export default function HeroAnimation() {
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{ display: 'block', touchAction: 'none' }}
+                style={{ display: 'block' }}
             />
 
             {/* Background hint text */}
