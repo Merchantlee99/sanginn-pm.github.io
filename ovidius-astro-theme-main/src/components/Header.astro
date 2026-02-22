@@ -84,40 +84,44 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
             )
         }
     </header>
+</div>
 
-    {/* Mobile Menu Overlay */}
-    <div id="mobile-menu" class="pointer-events-auto fixed inset-0 z-40 bg-white/95 backdrop-blur-xl translate-x-full transition-transform duration-300 ease-in-out sm:hidden flex flex-col pt-24 px-6 pb-8">
-        <nav class="flex flex-col gap-4 text-center mt-4 flex-1">
-            {primaryNavLinks.filter(link => link.text !== 'Contact').map((link) => (
-                <a
-                    href={link.href}
-                    class="text-2xl font-extrabold text-slate-800 hover:text-[var(--color-primary)] transition-colors py-2 mobile-nav-link"
-                >
-                    {link.text}
-                </a>
-            ))}
-        </nav>
-
-        <div class="flex flex-col items-center gap-6 mt-auto">
-            {/* Mobile Language Toggle */}
-            <div class="flex items-center justify-center gap-4 text-lg font-bold">
-                <button class="text-[var(--color-primary)]">KR</button>
-                <span class="text-slate-300">|</span>
-                <button class="text-slate-500 hover:text-[var(--color-primary)] transition-colors">EN</button>
-            </div>
-            
-            {/* Mobile Social Links */}
-            <div class="flex items-center justify-center gap-4 pt-6 border-t border-slate-200 w-full">
-                {siteConfig.socialLinks?.map((link) => (
-                    <SocialLink 
-                        {...link} 
-                        class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-[var(--color-primary)] hover:text-white transition-all shadow-sm" 
-                    />
+{/* Mobile Menu Overlay */}
+{
+    primaryNavLinks.length > 0 && (
+        <div id="mobile-menu" class="pointer-events-auto fixed inset-0 z-40 bg-white/95 backdrop-blur-xl -translate-y-full opacity-0 invisible transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:hidden flex flex-col pt-28 px-6 pb-8">
+            <nav class="flex flex-col gap-4 text-center mt-4 flex-1">
+                {primaryNavLinks.filter(link => link.text !== 'Contact').map((link) => (
+                    <a
+                        href={link.href}
+                        class="text-2xl font-extrabold text-slate-800 hover:text-[var(--color-primary)] transition-colors py-2 mobile-nav-link"
+                    >
+                        {link.text}
+                    </a>
                 ))}
+            </nav>
+
+            <div class="flex flex-col items-center gap-6 mt-auto">
+                {/* Mobile Language Toggle */}
+                <div class="flex items-center justify-center gap-4 text-lg font-bold">
+                    <button class="text-[var(--color-primary)]">KR</button>
+                    <span class="text-slate-300">|</span>
+                    <button class="text-slate-500 hover:text-[var(--color-primary)] transition-colors">EN</button>
+                </div>
+                
+                {/* Mobile Social Links */}
+                <div class="flex items-center justify-center gap-4 pt-6 border-t border-slate-200 w-full">
+                    {siteConfig.socialLinks?.map((link) => (
+                        <SocialLink 
+                            {...link} 
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-[var(--color-primary)] hover:text-white transition-all shadow-sm" 
+                        />
+                    ))}
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    )
+}
 
 <style>
     .no-scrollbar::-webkit-scrollbar {
@@ -133,9 +137,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
     }
     #mobile-menu-toggle[aria-expanded="true"] .close-icon {
         display: block;
-    }
-    #mobile-menu.open {
-        transform: translateX(0);
     }
 </style>
 
@@ -153,11 +154,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
 
         const toggleMenu = () => {
             const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-            toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
-            menu.classList.toggle('open');
+            const willExpand = !isExpanded;
+            toggleBtn.setAttribute('aria-expanded', willExpand.toString());
             
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = !isExpanded ? 'hidden' : '';
+            if (willExpand) {
+                // Open menu - slide down & fade in
+                menu.classList.remove('-translate-y-full', 'opacity-0', 'invisible');
+                menu.classList.add('translate-y-0', 'opacity-100', 'visible');
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Close menu - slide up & fade out
+                menu.classList.add('-translate-y-full', 'opacity-0', 'invisible');
+                menu.classList.remove('translate-y-0', 'opacity-100', 'visible');
+                document.body.style.overflow = '';
+            }
         };
 
         toggleBtn.addEventListener('click', toggleMenu);
@@ -165,9 +175,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
         // Close menu when a link is clicked
         links.forEach(link => {
             link.addEventListener('click', () => {
-                toggleBtn.setAttribute('aria-expanded', 'false');
-                menu.classList.remove('open');
-                document.body.style.overflow = '';
+                if (toggleBtn.getAttribute('aria-expanded') === 'true') {
+                    toggleMenu();
+                }
             });
         });
     };
