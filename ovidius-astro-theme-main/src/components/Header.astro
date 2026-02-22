@@ -147,7 +147,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
 
         if (!toggleBtn || !menu) return;
 
-        const toggleMenu = () => {
+        // Clean up previous event listeners if setup runs multiple times on the same elements
+        const toggleMenu = (e) => {
             const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
             toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
             menu.classList.toggle('open');
@@ -156,21 +157,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
             document.body.style.overflow = !isExpanded ? 'hidden' : '';
         };
 
-        toggleBtn.addEventListener('click', toggleMenu);
+        // Remove old listener if exists (to prevent duplicates during HMR or misfires)
+        toggleBtn.replaceWith(toggleBtn.cloneNode(true));
+        
+        // Re-query the button after cloning
+        const newToggleBtn = document.getElementById('mobile-menu-toggle');
+        newToggleBtn.addEventListener('click', toggleMenu);
 
         // Close menu when a link is clicked
-        links.forEach(link => {
+        const newLinks = document.querySelectorAll('.mobile-nav-link');
+        newLinks.forEach(link => {
             link.addEventListener('click', () => {
-                toggleBtn.setAttribute('aria-expanded', 'false');
+                newToggleBtn.setAttribute('aria-expanded', 'false');
                 menu.classList.remove('open');
                 document.body.style.overflow = '';
             });
         });
     };
 
-    // Run on initial load
-    setupMobileMenu();
-
-    // Re-run setup after Astro view transitions
+    // astro:page-load fires on initial load and after every ViewTransition navigation.
     document.addEventListener('astro:page-load', setupMobileMenu);
 </script>
