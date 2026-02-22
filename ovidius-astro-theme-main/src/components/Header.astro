@@ -147,8 +147,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
 
         if (!toggleBtn || !menu) return;
 
-        // Clean up previous event listeners if setup runs multiple times on the same elements
-        const toggleMenu = (e) => {
+        // Prevent double initialization if the script runs multiple times
+        if (toggleBtn.dataset.initialized === 'true') return;
+        toggleBtn.dataset.initialized = 'true';
+
+        const toggleMenu = () => {
             const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
             toggleBtn.setAttribute('aria-expanded', (!isExpanded).toString());
             menu.classList.toggle('open');
@@ -157,18 +160,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
             document.body.style.overflow = !isExpanded ? 'hidden' : '';
         };
 
-        // Remove old listener if exists (to prevent duplicates during HMR or misfires)
-        toggleBtn.replaceWith(toggleBtn.cloneNode(true));
-        
-        // Re-query the button after cloning
-        const newToggleBtn = document.getElementById('mobile-menu-toggle');
-        newToggleBtn.addEventListener('click', toggleMenu);
+        toggleBtn.addEventListener('click', toggleMenu);
 
         // Close menu when a link is clicked
-        const newLinks = document.querySelectorAll('.mobile-nav-link');
-        newLinks.forEach(link => {
+        links.forEach(link => {
             link.addEventListener('click', () => {
-                newToggleBtn.setAttribute('aria-expanded', 'false');
+                toggleBtn.setAttribute('aria-expanded', 'false');
                 menu.classList.remove('open');
                 document.body.style.overflow = '';
             });
