@@ -366,6 +366,20 @@ export default function HeroAnimation() {
             mouseRef.current = { x: -1000, y: -1000 };
         };
 
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                const rect = canvas.getBoundingClientRect();
+                mouseRef.current = {
+                    x: e.touches[0].clientX - rect.left,
+                    y: e.touches[0].clientY - rect.top
+                };
+            }
+        };
+
+        const handleTouchEnd = () => {
+            mouseRef.current = { x: -1000, y: -1000 };
+        };
+
         const animate = () => {
             ctx.fillStyle = BG_COLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -385,6 +399,11 @@ export default function HeroAnimation() {
         canvas.addEventListener('mousemove', handleMouseMove);
         canvas.addEventListener('mouseleave', handleMouseLeave);
 
+        // Touch events for mobile support
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: true });
+        canvas.addEventListener('touchend', handleTouchEnd);
+        canvas.addEventListener('touchcancel', handleTouchEnd);
+
         resizeCanvas();
         animate();
 
@@ -392,6 +411,11 @@ export default function HeroAnimation() {
             window.removeEventListener('resize', resizeCanvas);
             canvas.removeEventListener('mousemove', handleMouseMove);
             canvas.removeEventListener('mouseleave', handleMouseLeave);
+
+            canvas.removeEventListener('touchmove', handleTouchMove);
+            canvas.removeEventListener('touchend', handleTouchEnd);
+            canvas.removeEventListener('touchcancel', handleTouchEnd);
+
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
