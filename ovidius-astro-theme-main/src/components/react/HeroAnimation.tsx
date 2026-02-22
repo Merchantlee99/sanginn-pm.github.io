@@ -435,7 +435,7 @@ export default function HeroAnimation() {
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{ display: 'block' }}
+                style={{ display: 'block', touchAction: 'none' }}
             />
 
             {/* Background hint text */}
