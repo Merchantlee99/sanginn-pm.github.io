@@ -18,7 +18,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
                     <CustomImage class="max-h-12" {...siteConfig.logo} loading="eager" fetchpriority="high" />
                 </a>
             ) : (
-                <a class="text-[10px] sm:text-xs font-bold text-slate-900 tracking-wide truncate max-w-[130px] sm:max-w-none shrink-0" href={base} title={siteConfig.title}>
+                <a class="text-[10px] sm:text-xs font-bold text-slate-900 tracking-wide truncate max-w-[220px] sm:max-w-none shrink-0" href={base} title={siteConfig.title}>
                     {siteConfig.title}
                 </a>
             )
